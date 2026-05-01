@@ -43,9 +43,12 @@ void GameElementLayer::pipeBornLogic(Bird *bird) {
         int topHeight = QRandomGenerator::global()->bounded(
             Constant::MIN_PIPE_HEIGHT, Constant::MAX_PIPE_HEIGHT + 1);
 
+        // 使用一半的 TOP_PIPE_LENGTHENING，让顶部有适当空隙
+        int halfExt = Constant::TOP_PIPE_LENGTHENING / 2;
+
         Pipe *top = PipePool::getInstance()->get("Pipe");
-        top->setAttribute(Constant::FRAME_WIDTH, -Constant::TOP_PIPE_LENGTHENING,
-                         topHeight + Constant::TOP_PIPE_LENGTHENING,
+        top->setAttribute(Constant::FRAME_WIDTH, -halfExt,
+                         topHeight + halfExt,
                          Pipe::TYPE_TOP_NORMAL, true);
 
         Pipe *bottom = PipePool::getInstance()->get("Pipe");
