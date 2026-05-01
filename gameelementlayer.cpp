@@ -101,9 +101,11 @@ void GameElementLayer::addNormalPipe() {
     int topHeight = QRandomGenerator::global()->bounded(
         Constant::MIN_PIPE_HEIGHT, Constant::MAX_PIPE_HEIGHT + 1);
 
+    int halfExt = Constant::TOP_PIPE_LENGTHENING / 2;
+
     Pipe *top = PipePool::getInstance()->get("Pipe");
-    top->setAttribute(x, -Constant::TOP_PIPE_LENGTHENING,
-                     topHeight + Constant::TOP_PIPE_LENGTHENING,
+    top->setAttribute(x, -halfExt,
+                     topHeight + halfExt,
                      Pipe::TYPE_TOP_NORMAL, true);
 
     Pipe *bottom = PipePool::getInstance()->get("Pipe");
@@ -143,9 +145,11 @@ void GameElementLayer::addMovingNormalPipe() {
     int topHeight = QRandomGenerator::global()->bounded(
         Constant::MIN_PIPE_HEIGHT, Constant::MAX_PIPE_HEIGHT + 1);
 
+    int halfExt = Constant::TOP_PIPE_LENGTHENING / 2;
+
     Pipe *top = PipePool::getInstance()->get("MovingPipe");
-    top->setAttribute(x, -Constant::TOP_PIPE_LENGTHENING,
-                     topHeight + Constant::TOP_PIPE_LENGTHENING,
+    top->setAttribute(x, -halfExt,
+                     topHeight + halfExt,
                      Pipe::TYPE_TOP_HARD, true);
 
     Pipe *bottom = PipePool::getInstance()->get("MovingPipe");
