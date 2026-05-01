@@ -6,7 +6,8 @@
 
 GameElementLayer::GameElementLayer(QObject *parent)
     : QObject(parent)
-    , counter(ScoreCounter::getInstance()) {
+    , counter(ScoreCounter::getInstance())
+    , lastScoreX(-1) {
 }
 
 GameElementLayer::~GameElementLayer() {
@@ -29,8 +30,34 @@ void GameElementLayer::draw(QPainter &painter, Bird *bird) {
     // 碰撞检测
     isCollideBird(bird);
 
+    // 得分检测 - 当鸟穿过管道时
+    checkScore(bird);
+
     // 生成新水管
     pipeBornLogic(bird);
+}
+
+void GameElementLayer::checkScore(Bird *bird) {
+    if (bird->isDead()) {
+        return;
+    }
+
+    int birdX = bird->getBirdX();
+
+    for (Pipe *pipe : pipes) {
+        // 检测上管道是否被越过（得分点）
+        if (pipe->getType() == Pipe::TYPE_TOP_NORMAL ||
+            pipe->getType() == Pipe::TYPE_TOP_HARD) {
+            int pipeX = pipe->getX();
+
+            // 如果鸟的X坐标刚越过管道（从左到右穿过）
+            // 并且这个管道还没被计过分
+            if (lastScoreX != pipeX && birdX > pipeX + Pipe::PIPE_WIDTH) {
+                counter->score();
+                lastScoreX = pipeX;
+            }
+        }
+    }
 }
 
 void GameElementLayer::pipeBornLogic(Bird *bird) {
@@ -39,55 +66,37 @@ void GameElementLayer::pipeBornLogic(Bird *bird) {
     }
 
     if (pipes.isEmpty()) {
-        int topHeight = QRandomGenerator::global()->bounded(
-            Constant::MIN_PIPE_HEIGHT, Constant::MAX_PIPE_HEIGHT + 1);
-
-        Pipe *top = PipePool::getInstance()->get("Pipe");
-        top->setAttribute(Constant::FRAME_WIDTH, -Constant::TOP_PIPE_LENGTHENING,
-                         topHeight + Constant::TOP_PIPE_LENGTHENING,
-                         Pipe::TYPE_TOP_NORMAL, true);
-
-        Pipe *bottom = PipePool::getInstance()->get("Pipe");
-        bottom->setAttribute(Constant::FRAME_WIDTH, topHeight + Constant::VERTICAL_INTERVAL,
-                            Constant::FRAME_HEIGHT - topHeight - Constant::VERTICAL_INTERVAL,
-                            Pipe::TYPE_BOTTOM_NORMAL, true);
-
-        pipes.append(top);
-        pipes.append(bottom);
+        // 第一个管道对
+        addNormalPipe(Constant::FRAME_WIDTH + 100);
     } else {
         Pipe *lastPipe = pipes.last();
-        int currentDistance = lastPipe->getX() - bird->getBirdX() + Bird::BIRD_WIDTH / 2;
-        const int SCORE_DISTANCE = Pipe::PIPE_WIDTH * 2 + Constant::HORIZONTAL_INTERVAL;
 
-        if (lastPipe->isInFrame()) {
-            if (pipes.size() >= PipePool::FULL_PIPE - 2 &&
-                currentDistance <= SCORE_DISTANCE + Pipe::PIPE_WIDTH * 3 / 2) {
-                counter->score();
-            }
-
-            int currentScore = static_cast<int>(counter->getCurrentScore()) + 1;
+        // 检查是否应该生成新管道
+        // 当最后一个管道的X坐标小于某个阈值时生成新管道
+        if (lastPipe->getX() < Constant::FRAME_WIDTH - Constant::HORIZONTAL_INTERVAL) {
+            // 根据分数决定管道类型
+            int currentScore = static_cast<int>(counter->getCurrentScore());
 
             if (currentScore > 19 || QRandomGenerator::global()->bounded(20) < currentScore) {
                 if (QRandomGenerator::global()->bounded(4) == 0) {
-                    addMovingHoverPipe(lastPipe);
+                    addMovingHoverPipe();
                 } else {
-                    addMovingNormalPipe(lastPipe);
+                    addMovingNormalPipe();
                 }
             } else {
                 if (QRandomGenerator::global()->bounded(2) == 0) {
-                    addNormalPipe(lastPipe);
+                    addNormalPipe();
                 } else {
-                    addHoverPipe(lastPipe);
+                    addHoverPipe();
                 }
             }
         }
     }
 }
 
-void GameElementLayer::addNormalPipe(Pipe *lastPipe) {
+void GameElementLayer::addNormalPipe(int x) {
     int topHeight = QRandomGenerator::global()->bounded(
         Constant::MIN_PIPE_HEIGHT, Constant::MAX_PIPE_HEIGHT + 1);
-    int x = lastPipe->getX() + Constant::HORIZONTAL_INTERVAL;
 
     Pipe *top = PipePool::getInstance()->get("Pipe");
     top->setAttribute(x, -Constant::TOP_PIPE_LENGTHENING,
@@ -103,10 +112,20 @@ void GameElementLayer::addNormalPipe(Pipe *lastPipe) {
     pipes.append(bottom);
 }
 
-void GameElementLayer::addHoverPipe(Pipe *lastPipe) {
+void GameElementLayer::addNormalPipe() {
+    if (pipes.isEmpty()) return;
+    Pipe *lastPipe = pipes.last();
+    int x = lastPipe->getX() + Constant::HORIZONTAL_INTERVAL;
+    addNormalPipe(x);
+}
+
+void GameElementLayer::addHoverPipe() {
+    if (pipes.isEmpty()) return;
+    Pipe *lastPipe = pipes.last();
+    int x = lastPipe->getX() + Constant::HORIZONTAL_INTERVAL;
+
     int topHoverHeight = QRandomGenerator::global()->bounded(
         Constant::FRAME_HEIGHT / 6, Constant::FRAME_HEIGHT / 4);
-    int x = lastPipe->getX() + Constant::HORIZONTAL_INTERVAL;
     int y = QRandomGenerator::global()->bounded(
         Constant::FRAME_HEIGHT / 12, Constant::FRAME_HEIGHT / 6);
 
@@ -122,10 +141,13 @@ void GameElementLayer::addHoverPipe(Pipe *lastPipe) {
     pipes.append(bottomHover);
 }
 
-void GameElementLayer::addMovingNormalPipe(Pipe *lastPipe) {
+void GameElementLayer::addMovingNormalPipe() {
+    if (pipes.isEmpty()) return;
+    Pipe *lastPipe = pipes.last();
+    int x = lastPipe->getX() + Constant::HORIZONTAL_INTERVAL;
+
     int topHeight = QRandomGenerator::global()->bounded(
         Constant::MIN_PIPE_HEIGHT, Constant::MAX_PIPE_HEIGHT + 1);
-    int x = lastPipe->getX() + Constant::HORIZONTAL_INTERVAL;
 
     Pipe *top = PipePool::getInstance()->get("MovingPipe");
     top->setAttribute(x, -Constant::TOP_PIPE_LENGTHENING,
@@ -141,10 +163,13 @@ void GameElementLayer::addMovingNormalPipe(Pipe *lastPipe) {
     pipes.append(bottom);
 }
 
-void GameElementLayer::addMovingHoverPipe(Pipe *lastPipe) {
+void GameElementLayer::addMovingHoverPipe() {
+    if (pipes.isEmpty()) return;
+    Pipe *lastPipe = pipes.last();
+    int x = lastPipe->getX() + Constant::HORIZONTAL_INTERVAL;
+
     int topHoverHeight = QRandomGenerator::global()->bounded(
         Constant::FRAME_HEIGHT / 6, Constant::FRAME_HEIGHT / 4);
-    int x = lastPipe->getX() + Constant::HORIZONTAL_INTERVAL;
     int y = QRandomGenerator::global()->bounded(
         Constant::FRAME_HEIGHT / 12, Constant::FRAME_HEIGHT / 6);
 
@@ -178,4 +203,5 @@ void GameElementLayer::reset() {
         PipePool::getInstance()->giveBack(pipe);
     }
     pipes.clear();
+    lastScoreX = -1;
 }

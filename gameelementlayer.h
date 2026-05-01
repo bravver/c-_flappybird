@@ -21,15 +21,18 @@ public:
     void reset();
 
 private:
+    void checkScore(Bird *bird);
     void pipeBornLogic(Bird *bird);
-    void addNormalPipe(Pipe *lastPipe);
-    void addHoverPipe(Pipe *lastPipe);
-    void addMovingNormalPipe(Pipe *lastPipe);
-    void addMovingHoverPipe(Pipe *lastPipe);
+    void addNormalPipe(int x);
+    void addNormalPipe();
+    void addHoverPipe();
+    void addMovingNormalPipe();
+    void addMovingHoverPipe();
     void isCollideBird(Bird *bird);
 
     QVector<Pipe*> pipes;
     ScoreCounter *counter;
+    int lastScoreX;  // 记录上次得分的管道X坐标，避免重复得分
 };
 
 #endif // GAMEELEMENTLAYER_H

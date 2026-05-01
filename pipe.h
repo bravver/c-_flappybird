@@ -35,6 +35,7 @@ public:
     bool isInFrame() const;
 
     int getX() const;
+    int getType() const;
     QRect getPipeRect() const;
 
     static int PIPE_WIDTH;

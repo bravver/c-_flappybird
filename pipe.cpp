@@ -128,6 +128,10 @@ int Pipe::getX() const {
     return x;
 }
 
+int Pipe::getType() const {
+    return type;
+}
+
 QRect Pipe::getPipeRect() const {
     return pipeRect;
 }

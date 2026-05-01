@@ -21,6 +21,8 @@ void GameBackground::draw(QPainter &painter, Bird *bird) {
     int imgWidth = backgroundImage.width();
     int imgHeight = backgroundImage.height();
 
+    // 绘制完整的背景图（天空+地面），从窗口底部开始
+    // 这样地面部分正好显示在窗口底部
     int count = Constant::FRAME_WIDTH / imgWidth + 2;
 
     for (int i = 0; i < count; i++) {
@@ -33,9 +35,9 @@ void GameBackground::draw(QPainter &painter, Bird *bird) {
         return;
     }
 
-    // 滚动背景
+    // 滚动背景（天空和地面一起滚动）
     layerX += speed;
-    if (layerX > backgroundImage.width()) {
+    if (layerX > imgWidth) {
         layerX = 0;
     }
 }
