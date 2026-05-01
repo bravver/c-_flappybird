@@ -32,7 +32,6 @@ private:
 
     QVector<Pipe*> pipes;
     ScoreCounter *counter;
-    int lastScoreX;  // 记录上次得分的管道X坐标，避免重复得分
 };
 
 #endif // GAMEELEMENTLAYER_H
