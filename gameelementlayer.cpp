@@ -14,7 +14,7 @@ GameElementLayer::~GameElementLayer() {
 }
 
 void GameElementLayer::draw(QPainter &painter, Bird *bird) {
-    // 遍历水管容器
+    // 遍历水管容器，如果可见则绘制，不可见则归还
     for (int i = 0; i < pipes.size(); i++) {
         Pipe *pipe = pipes[i];
         if (pipe->isVisible()) {
@@ -29,11 +29,10 @@ void GameElementLayer::draw(QPainter &painter, Bird *bird) {
     // 碰撞检测
     isCollideBird(bird);
 
-    // 生成新水管（包含得分检测）
+    // 生成新水管
     pipeBornLogic(bird);
 }
 
-// 生成新水管 - 完全按照Java逻辑
 void GameElementLayer::pipeBornLogic(Bird *bird) {
     if (bird->isDead()) {
         return;
@@ -63,10 +62,12 @@ void GameElementLayer::pipeBornLogic(Bird *bird) {
         const int SCORE_DISTANCE = Pipe::PIPE_WIDTH * 2 + Constant::HORIZONTAL_INTERVAL;
 
         if (lastPipe->isInFrame()) {
-            // Java: pipes.size() >= PipePool.FULL_PIPE - 2 (即 >= 8)
-            // 但由于我们立即移除不可见的管道，pipes.size() 通常 <= 2
-            // 所以我们改成：当 currentDistance <= SCORE_DISTANCE + PIPE_WIDTH * 3/2 时得分
-            if (currentDistance <= SCORE_DISTANCE + Pipe::PIPE_WIDTH * 3 / 2) {
+            // Java: pipes.size() >= PipePool.FULL_PIPE - 2
+            // FULL_PIPE = 10，所以 pipes.size() >= 8 时得分
+            // 但 Qt 版本立即移除不可见管道，所以 pipes.size() 最多为 2
+            // 我们改成：只有当 pipes.size() == 2（一对管道都在）时才可能得分
+            if (pipes.size() >= 2 &&
+                currentDistance <= SCORE_DISTANCE + Pipe::PIPE_WIDTH * 3 / 2) {
                 counter->score();
             }
 
@@ -74,16 +75,16 @@ void GameElementLayer::pipeBornLogic(Bird *bird) {
             int currentScore = static_cast<int>(counter->getCurrentScore()) + 1;
 
             // Java: isInProbability(currentScore, 20) = random(1, 21) <= currentScore
-            bool generateHardPipe = (QRandomGenerator::global()->bounded(1, 21) <= currentScore);
-
-            if (generateHardPipe) {
-                if (QRandomGenerator::global()->bounded(1, 5) <= 1) { // isInProbability(1, 4)
+            if (QRandomGenerator::global()->bounded(1, 21) <= currentScore) {
+                // 移动水管
+                if (QRandomGenerator::global()->bounded(1, 5) <= 1) {
                     addMovingHoverPipe();
                 } else {
                     addMovingNormalPipe();
                 }
             } else {
-                if (QRandomGenerator::global()->bounded(1, 3) <= 1) { // isInProbability(1, 2)
+                // 普通水管
+                if (QRandomGenerator::global()->bounded(1, 3) <= 1) {
                     addNormalPipe();
                 } else {
                     addHoverPipe();
