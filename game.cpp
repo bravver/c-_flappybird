@@ -2,6 +2,8 @@
 #include <QPainter>
 #include <QDebug>
 
+int Game::gameState = 0;
+
 Game::Game(QWidget *parent)
     : QWidget(parent), timer(new QTimer(this)) {
 
@@ -42,6 +44,7 @@ void Game::initGame() {
 }
 
 void Game::paintEvent(QPaintEvent *event) {
+    Q_UNUSED(event);
     QPainter painter(this);
     painter.setRenderHint(QPainter::SmoothPixmapTransform);
 

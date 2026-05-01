@@ -14,6 +14,7 @@ GameOverAnimation::GameOverAnimation(QObject *parent)
 GameOverAnimation::~GameOverAnimation() {}
 
 void GameOverAnimation::draw(QPainter &painter, Bird *bird) {
+    Q_UNUSED(bird);
     // 绘制 Game Over
     int overX = (Constant::FRAME_WIDTH - overImage.width()) / 2;
     int overY = Constant::FRAME_HEIGHT / 4;
