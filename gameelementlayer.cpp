@@ -5,7 +5,8 @@
 
 GameElementLayer::GameElementLayer(QObject *parent)
     : QObject(parent)
-    , counter(ScoreCounter::getInstance()) {
+    , counter(ScoreCounter::getInstance())
+    , lastScoreX(-1) {
 }
 
 GameElementLayer::~GameElementLayer() {
@@ -61,11 +62,11 @@ void GameElementLayer::pipeBornLogic(Bird *bird) {
         const int SCORE_DISTANCE = Pipe::PIPE_WIDTH * 2 + Constant::HORIZONTAL_INTERVAL;
 
         if (lastPipe->isInFrame()) {
-            // Java: pipes.size() >= PipePool.FULL_PIPE - 2
-            // FULL_PIPE = 10，所以是 pipes.size() >= 8
-            if (pipes.size() >= PipePool::FULL_PIPE - 2 &&
+            // 得分检测：当 currentDistance 满足条件且这根管道还没得过分
+            if (lastScoreX != lastPipe->getX() &&
                 currentDistance <= SCORE_DISTANCE + Pipe::PIPE_WIDTH * 3 / 2) {
                 counter->score();
+                lastScoreX = lastPipe->getX();
             }
 
             // 生成新管道
@@ -199,4 +200,5 @@ void GameElementLayer::reset() {
         PipePool::getInstance()->giveBack(pipe);
     }
     pipes.clear();
+    lastScoreX = -1;
 }
