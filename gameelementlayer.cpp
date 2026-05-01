@@ -6,8 +6,7 @@
 
 GameElementLayer::GameElementLayer(QObject *parent)
     : QObject(parent)
-    , counter(ScoreCounter::getInstance())
-    , lastBornX(0) {
+    , counter(ScoreCounter::getInstance()) {
 }
 
 GameElementLayer::~GameElementLayer() {
@@ -15,7 +14,7 @@ GameElementLayer::~GameElementLayer() {
 }
 
 void GameElementLayer::draw(QPainter &painter, Bird *bird) {
-    // 遍历水管容器，如果可见则绘制，不可见则归还
+    // 遍历水管容器
     for (int i = 0; i < pipes.size(); i++) {
         Pipe *pipe = pipes[i];
         if (pipe->isVisible()) {
@@ -45,45 +44,49 @@ void GameElementLayer::pipeBornLogic(Bird *bird) {
             Constant::MIN_PIPE_HEIGHT, Constant::MAX_PIPE_HEIGHT + 1);
 
         Pipe *top = PipePool::getInstance()->get("Pipe");
-        top->setAttribute(Constant::FRAME_WIDTH + 100, -Constant::TOP_PIPE_LENGTHENING,
+        top->setAttribute(Constant::FRAME_WIDTH, -Constant::TOP_PIPE_LENGTHENING,
                          topHeight + Constant::TOP_PIPE_LENGTHENING,
                          Pipe::TYPE_TOP_NORMAL, true);
 
         Pipe *bottom = PipePool::getInstance()->get("Pipe");
-        bottom->setAttribute(Constant::FRAME_WIDTH + 100, topHeight + Constant::VERTICAL_INTERVAL,
+        bottom->setAttribute(Constant::FRAME_WIDTH, topHeight + Constant::VERTICAL_INTERVAL,
                             Constant::FRAME_HEIGHT - topHeight - Constant::VERTICAL_INTERVAL,
                             Pipe::TYPE_BOTTOM_NORMAL, true);
 
         pipes.append(top);
         pipes.append(bottom);
-        lastBornX = Constant::FRAME_WIDTH + 100;
     } else {
-        // 获取最后一根可见管道的X坐标
-        int lastX = pipes.last()->getX();
+        // 判断最后一根水管
+        Pipe *lastPipe = pipes.last();
 
-        // 只有当最后一根管道的X小于阈值，并且与上次生成位置有足够距离时才生成
-        if (lastX < Constant::FRAME_WIDTH / 2 && lastX > lastBornX - Constant::HORIZONTAL_INTERVAL) {
-            // 生成新管道
+        // Java: lastPipe.isInFrame() = (lastPipe.getX() + Pipe.PIPE_WIDTH < FRAME_WIDTH)
+        // 即管道左边界 + 管道宽度 < 420 时表示管道完全进入窗口
+        if (lastPipe->getX() + Pipe::PIPE_WIDTH < Constant::FRAME_WIDTH) {
+
+            // 得分检测 - Java 的原始逻辑
+            int currentDistance = lastPipe->getX() - bird->getBirdX() + Bird::BIRD_WIDTH / 2;
+            const int SCORE_DISTANCE = Pipe::PIPE_WIDTH * 2 + Constant::HORIZONTAL_INTERVAL;
+            if (currentDistance <= SCORE_DISTANCE + Pipe::PIPE_WIDTH * 3 / 2) {
+                counter->score();
+            }
+
+            // 生成新管道 - Java 原始逻辑
             int currentScore = static_cast<int>(counter->getCurrentScore()) + 1;
 
-            // Java: isInProbability(currentScore, 20)
+            // Java: isInProbability(currentScore, 20) = random(1, 21) <= currentScore
             if (QRandomGenerator::global()->bounded(1, 21) <= currentScore) {
-                // 移动水管
-                if (QRandomGenerator::global()->bounded(1, 5) <= 1) {
+                if (QRandomGenerator::global()->bounded(1, 5) <= 1) { // 1/4概率
                     addMovingHoverPipe();
                 } else {
                     addMovingNormalPipe();
                 }
             } else {
-                // 普通水管
-                if (QRandomGenerator::global()->bounded(1, 3) <= 1) {
+                if (QRandomGenerator::global()->bounded(1, 3) <= 1) { // 1/2概率
                     addNormalPipe();
                 } else {
                     addHoverPipe();
                 }
             }
-
-            lastBornX = pipes.last()->getX();
         }
     }
 }
@@ -190,5 +193,4 @@ void GameElementLayer::reset() {
         PipePool::getInstance()->giveBack(pipe);
     }
     pipes.clear();
-    lastBornX = 0;
 }

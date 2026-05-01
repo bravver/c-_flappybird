@@ -30,7 +30,6 @@ private:
 
     QVector<Pipe*> pipes;
     ScoreCounter *counter;
-    int lastBornX;  // 记录上次生成管道的位置，避免重复生成
 };
 
 #endif // GAMEELEMENTLAYER_H
