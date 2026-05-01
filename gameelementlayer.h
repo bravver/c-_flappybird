@@ -30,6 +30,7 @@ private:
 
     QVector<Pipe*> pipes;
     ScoreCounter *counter;
+    int lastScoreX;
 };
 
 #endif // GAMEELEMENTLAYER_H
