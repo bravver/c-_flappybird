@@ -21,13 +21,11 @@ public:
     void reset();
 
 private:
-    void checkScore(Bird *bird);
     void pipeBornLogic(Bird *bird);
-    void addNormalPipe(int x);
-    void addNormalPipe();
-    void addHoverPipe();
-    void addMovingNormalPipe();
-    void addMovingHoverPipe();
+    void addNormalPipe(int lastX);
+    void addHoverPipe(int lastX);
+    void addMovingNormalPipe(int lastX);
+    void addMovingHoverPipe(int lastX);
     void isCollideBird(Bird *bird);
 
     QVector<Pipe*> pipes;
