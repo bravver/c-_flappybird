@@ -2,6 +2,7 @@
 #define CONSTANT_H
 
 #include <QString>
+#include <QStringList>
 #include <QRgb>
 
 class Constant {

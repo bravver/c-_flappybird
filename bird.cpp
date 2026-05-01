@@ -1,4 +1,5 @@
 #include "bird.h"
+#include "game.h"
 #include <QPainter>
 #include <QDebug>
 
@@ -66,7 +67,7 @@ void Bird::draw(QPainter &painter) {
     if (velocity > 0 && state == BIRD_UP) {
         image = upImages[0];
     } else {
-        int stateIndex = qMin(state, BIRD_DEAD_FALL);
+        int stateIndex = qMin(static_cast<int>(state), static_cast<int>(BIRD_DEAD_FALL));
         if (stateIndex == BIRD_NORMAL || stateIndex == BIRD_FALL) {
             image = normalImages[wingState / 10 % 8];
         } else if (stateIndex == BIRD_UP) {

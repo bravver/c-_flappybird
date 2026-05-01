@@ -8,10 +8,11 @@ int Pipe::PIPE_HEAD_HEIGHT = 0;
 
 Pipe::Pipe(QObject *parent)
     : QObject(parent)
-    , x(0), y(0), width(0), height(0)
     , type(TYPE_TOP_NORMAL)
-    , visible(false)
-    , speed(Constant::GAME_SPEED) {
+    , speed(Constant::GAME_SPEED)
+    , x(0), y(0)
+    , width(0), height(0)
+    , visible(false) {
 
     static bool initialized = false;
     if (!initialized) {
