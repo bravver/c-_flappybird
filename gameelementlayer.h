@@ -22,14 +22,15 @@ public:
 
 private:
     void pipeBornLogic(Bird *bird);
-    void addNormalPipe(int lastX);
-    void addHoverPipe(int lastX);
-    void addMovingNormalPipe(int lastX);
-    void addMovingHoverPipe(int lastX);
+    void addNormalPipe();
+    void addHoverPipe();
+    void addMovingNormalPipe();
+    void addMovingHoverPipe();
     void isCollideBird(Bird *bird);
 
     QVector<Pipe*> pipes;
     ScoreCounter *counter;
+    int lastBornX;  // 记录上次生成管道的位置，避免重复生成
 };
 
 #endif // GAMEELEMENTLAYER_H
