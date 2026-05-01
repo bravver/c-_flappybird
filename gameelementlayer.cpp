@@ -62,8 +62,9 @@ void GameElementLayer::pipeBornLogic(Bird *bird) {
         const int SCORE_DISTANCE = Pipe::PIPE_WIDTH * 2 + Constant::HORIZONTAL_INTERVAL;
 
         if (lastPipe->isInFrame()) {
-            // 得分检测：当 currentDistance 满足条件且这根管道还没得过分
-            if (lastScoreX != lastPipe->getX() &&
+            // Java: pipes.size() >= FULL_PIPE - 2 = 8
+            if (pipes.size() >= PipePool::FULL_PIPE - 2 &&
+                lastScoreX != lastPipe->getX() &&
                 currentDistance <= SCORE_DISTANCE + Pipe::PIPE_WIDTH * 3 / 2) {
                 counter->score();
                 lastScoreX = lastPipe->getX();
