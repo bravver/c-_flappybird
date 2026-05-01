@@ -1,0 +1,37 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/">
+        <file>resources/img/background.png</file>
+        <file>resources/img/0.png</file>
+        <file>resources/img/1.png</file>
+        <file>resources/img/2.png</file>
+        <file>resources/img/3.png</file>
+        <file>resources/img/4.png</file>
+        <file>resources/img/5.png</file>
+        <file>resources/img/6.png</file>
+        <file>resources/img/7.png</file>
+        <file>resources/img/up.png</file>
+        <file>resources/img/down_0.png</file>
+        <file>resources/img/down_1.png</file>
+        <file>resources/img/down_2.png</file>
+        <file>resources/img/down_3.png</file>
+        <file>resources/img/down_4.png</file>
+        <file>resources/img/down_5.png</file>
+        <file>resources/img/down_6.png</file>
+        <file>resources/img/down_7.png</file>
+        <file>resources/img/dead.png</file>
+        <file>resources/img/pipe.png</file>
+        <file>resources/img/pipe_top.png</file>
+        <file>resources/img/pipe_bottom.png</file>
+        <file>resources/img/cloud_0.png</file>
+        <file>resources/img/cloud_1.png</file>
+        <file>resources/img/title.png</file>
+        <file>resources/img/start.png</file>
+        <file>resources/img/over.png</file>
+        <file>resources/img/again.png</file>
+        <file>resources/img/score.png</file>
+        <file>resources/wav/fly.wav</file>
+        <file>resources/wav/score.wav</file>
+        <file>resources/wav/crash.wav</file>
+    </qresource>
+</RCC>
