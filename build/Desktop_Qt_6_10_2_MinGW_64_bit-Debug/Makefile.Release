@@ -413,6 +413,7 @@ release/moc_game.cpp: ../../game.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/qpen.h \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
 		../../bird.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QPixmap \
@@ -595,6 +596,7 @@ release/moc_bird.cpp: ../../bird.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/qurl.h \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
 		../../scorecounter.h \
 		release/moc_predefs.h \
@@ -751,6 +753,7 @@ release/moc_pipe.cpp: ../../pipe.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QRect \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
 		release/moc_predefs.h \
 		D:/QT/6.10.2/mingw_64/bin/moc.exe
@@ -909,6 +912,7 @@ release/moc_pipepool.cpp: ../../pipepool.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QRect \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
 		release/moc_predefs.h \
 		D:/QT/6.10.2/mingw_64/bin/moc.exe
@@ -1063,6 +1067,7 @@ release/moc_gamebackground.cpp: ../../gamebackground.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QPixmap \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
 		release/moc_predefs.h \
 		D:/QT/6.10.2/mingw_64/bin/moc.exe
@@ -1215,6 +1220,12 @@ release/moc_gameforeground.cpp: ../../gameforeground.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/qfontvariableaxis.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/qfontmetrics.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QPixmap \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QVector \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qvector.h \
+		../../constant.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
+		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
 		release/moc_predefs.h \
 		D:/QT/6.10.2/mingw_64/bin/moc.exe
 	D:\QT\6.10.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/15662/flappybird-qt/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/release/moc_predefs.h -ID:/QT/6.10.2/mingw_64/mkspecs/win32-g++ -IC:/Users/15662/flappybird-qt -ID:/FlappyBird/resources -ID:/QT/6.10.2/mingw_64/include -ID:/QT/6.10.2/mingw_64/include/QtWidgets -ID:/QT/6.10.2/mingw_64/include/QtMultimedia -ID:/QT/6.10.2/mingw_64/include/QtGui -ID:/QT/6.10.2/mingw_64/include/QtNetwork -ID:/QT/6.10.2/mingw_64/include/QtCore -I. -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -ID:/QT/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\gameforeground.h -o release\moc_gameforeground.cpp
@@ -1372,6 +1383,7 @@ release/moc_gameelementlayer.cpp: ../../gameelementlayer.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QRect \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
 		../../pipepool.h \
 		release/moc_predefs.h \
@@ -2030,6 +2042,7 @@ release/main.o: ../../main.cpp ../../game.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/qpen.h \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
 		../../bird.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QPixmap \
@@ -2261,6 +2274,7 @@ release/game.o: ../../game.cpp ../../game.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/qpen.h \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
 		../../bird.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QPixmap \
@@ -2442,9 +2456,19 @@ release/bird.o: ../../bird.cpp ../../bird.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/qurl.h \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
 		../../scorecounter.h \
-		D:/QT/6.10.2/mingw_64/include/QtCore/QDebug \
+		../../game.h \
+		D:/QT/6.10.2/mingw_64/include/QtWidgets/QWidget \
+		D:/QT/6.10.2/mingw_64/include/QtWidgets/qwidget.h \
+		D:/QT/6.10.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+		D:/QT/6.10.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		D:/QT/6.10.2/mingw_64/include/QtWidgets/qtwidgetsexports.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qaction.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qkeysequence.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qicon.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qvariant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/qdebug.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/qtextstream.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/qcontiguouscache.h \
@@ -2455,7 +2479,53 @@ release/bird.o: ../../bird.cpp ../../bird.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/qset.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/qhash.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/qvarlengtharray.h \
-		D:/QT/6.10.2/mingw_64/include/QtCore/qalloc.h
+		D:/QT/6.10.2/mingw_64/include/QtCore/qalloc.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qpalette.h \
+		D:/QT/6.10.2/mingw_64/include/QtWidgets/qsizepolicy.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qcursor.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qbitmap.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qevent.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qiodevice.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qeventpoint.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qvector2d.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qvectornd.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qpointingdevice.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qinputdevice.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qscreen.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QList \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QSize \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QSizeF \
+		D:/QT/6.10.2/mingw_64/include/QtGui/QTransform \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qnativeinterface.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qscreen_platform.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qguiapplication.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qcoreapplication.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qcoreapplication_platform.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qfuture.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qfutureinterface.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qmutex.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qtsan_impl.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qresultstore.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qfuture_impl.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qthreadpool.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qthread.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qrunnable.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qexception.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qpromise.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qinputmethod.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qlocale.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QTimer \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qtimer.h \
+		D:/QT/6.10.2/mingw_64/include/QtGui/QKeyEvent \
+		../../gamebackground.h \
+		../../gameforeground.h \
+		../../gameelementlayer.h \
+		../../pipe.h \
+		../../pipepool.h \
+		../../welcomanimation.h \
+		../../gameoveranimation.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\bird.o ..\..\bird.cpp
 
 release/pipe.o: ../../pipe.cpp ../../pipe.h \
@@ -2608,6 +2678,7 @@ release/pipe.o: ../../pipe.cpp ../../pipe.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QRect \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
 		../../bird.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QVector \
@@ -2775,6 +2846,7 @@ release/pipepool.o: ../../pipepool.cpp ../../pipepool.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QRect \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\pipepool.o ..\..\pipepool.cpp
 
@@ -2927,6 +2999,7 @@ release/gamebackground.o: ../../gamebackground.cpp ../../gamebackground.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QPixmap \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
 		../../bird.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QRect \
@@ -3089,10 +3162,30 @@ release/gameforeground.o: ../../gameforeground.cpp ../../gameforeground.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/qfontvariableaxis.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/qfontmetrics.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QPixmap \
-		../../gamebackground.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QVector \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qvector.h \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
-		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
+		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QRandomGenerator \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qrandom.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QDateTime \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qdatetime.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qcalendar.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qlocale.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qvariant.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qdebug.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qtextstream.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qcontiguouscache.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qsharedpointer.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qsharedpointer_impl.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qmap.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qshareddata_impl.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qset.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qhash.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qvarlengtharray.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qalloc.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\gameforeground.o ..\..\gameforeground.cpp
 
 release/gameelementlayer.o: ../../gameelementlayer.cpp ../../gameelementlayer.h \
@@ -3248,6 +3341,7 @@ release/gameelementlayer.o: ../../gameelementlayer.cpp ../../gameelementlayer.h 
 		D:/QT/6.10.2/mingw_64/include/QtCore/QRect \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
 		../../pipepool.h \
 		../../bird.h \
@@ -3260,19 +3354,7 @@ release/gameelementlayer.o: ../../gameelementlayer.cpp ../../gameelementlayer.h 
 		D:/QT/6.10.2/mingw_64/include/QtCore/qurl.h \
 		../../scorecounter.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QRandomGenerator \
-		D:/QT/6.10.2/mingw_64/include/QtCore/qrandom.h \
-		D:/QT/6.10.2/mingw_64/include/QtCore/QDebug \
-		D:/QT/6.10.2/mingw_64/include/QtCore/qdebug.h \
-		D:/QT/6.10.2/mingw_64/include/QtCore/qtextstream.h \
-		D:/QT/6.10.2/mingw_64/include/QtCore/qcontiguouscache.h \
-		D:/QT/6.10.2/mingw_64/include/QtCore/qsharedpointer.h \
-		D:/QT/6.10.2/mingw_64/include/QtCore/qsharedpointer_impl.h \
-		D:/QT/6.10.2/mingw_64/include/QtCore/qmap.h \
-		D:/QT/6.10.2/mingw_64/include/QtCore/qshareddata_impl.h \
-		D:/QT/6.10.2/mingw_64/include/QtCore/qset.h \
-		D:/QT/6.10.2/mingw_64/include/QtCore/qhash.h \
-		D:/QT/6.10.2/mingw_64/include/QtCore/qvarlengtharray.h \
-		D:/QT/6.10.2/mingw_64/include/QtCore/qalloc.h
+		D:/QT/6.10.2/mingw_64/include/QtCore/qrandom.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\gameelementlayer.o ..\..\gameelementlayer.cpp
 
 release/welcomanimation.o: ../../welcomanimation.cpp ../../welcomanimation.h \
@@ -3424,6 +3506,7 @@ release/welcomanimation.o: ../../welcomanimation.cpp ../../welcomanimation.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QPixmap \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\welcomanimation.o ..\..\welcomanimation.cpp
 
@@ -3587,6 +3670,7 @@ release/gameoveranimation.o: ../../gameoveranimation.cpp ../../gameoveranimation
 		D:/QT/6.10.2/mingw_64/include/QtCore/qurl.h \
 		../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/QString \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
 		../../scorecounter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\gameoveranimation.o ..\..\gameoveranimation.cpp
@@ -3801,6 +3885,14 @@ release/constant.o: ../../constant.cpp ../../constant.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/qstringbuilder.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/qstringconverter.h \
 		D:/QT/6.10.2/mingw_64/include/QtCore/qstringconverter_base.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/QStringList \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qstringlist.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qlist.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qhashfunctions.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qiterator.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qbytearraylist.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qalgorithms.h \
+		D:/QT/6.10.2/mingw_64/include/QtCore/qstringmatcher.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/QRgb \
 		D:/QT/6.10.2/mingw_64/include/QtGui/qrgb.h \
 		D:/QT/6.10.2/mingw_64/include/QtGui/qtguiglobal.h \

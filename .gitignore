@@ -1,5 +1,7 @@
 # Qt 构建产物
 build/
+build-Debug/
+build-Release/
 debug/
 release/
 *.pro.user
