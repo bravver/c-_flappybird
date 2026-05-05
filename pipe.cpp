@@ -12,7 +12,8 @@ Pipe::Pipe(QObject *parent)
     , speed(Constant::GAME_SPEED)
     , x(0), y(0)
     , width(0), height(0)
-    , visible(false) {
+    , visible(false)
+    , scored(false) {
 
     static bool initialized = false;
     if (!initialized) {
@@ -62,6 +63,15 @@ void Pipe::draw(QPainter &painter, Bird *bird) {
         break;
     case TYPE_HOVER_NORMAL:
         drawHoverNormal(painter);
+        break;
+    case TYPE_TOP_HARD:
+        drawTopHard(painter);
+        break;
+    case TYPE_BOTTOM_HARD:
+        drawBottomHard(painter);
+        break;
+    case TYPE_HOVER_HARD:
+        drawHoverHard(painter);
         break;
     }
 
@@ -134,4 +144,24 @@ int Pipe::getType() const {
 
 QRect Pipe::getPipeRect() const {
     return pipeRect;
+}
+
+bool Pipe::isScored() const {
+    return scored;
+}
+
+void Pipe::setScored(bool scored) {
+    this->scored = scored;
+}
+
+void Pipe::drawTopHard(QPainter &painter) {
+    drawTopNormal(painter);
+}
+
+void Pipe::drawBottomHard(QPainter &painter) {
+    drawBottomNormal(painter);
+}
+
+void Pipe::drawHoverHard(QPainter &painter) {
+    drawHoverNormal(painter);
 }

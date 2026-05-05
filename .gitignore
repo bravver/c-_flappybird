@@ -1,0 +1,32 @@
+# Qt 构建产物
+build/
+debug/
+release/
+*.pro.user
+*.pro.user.*
+.qtc_clangd/
+.qmake.stash
+Makefile
+Makefile.*
+*.o
+*.obj
+*.exe
+*.dll
+*.a
+*.lib
+
+# IDE 生成文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+qtcreator/
+.claude/
+
+# 运行时生成
+score.txt
+*.log
+
+# macOS
+.DS_Store

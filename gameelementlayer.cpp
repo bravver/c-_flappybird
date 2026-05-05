@@ -29,8 +29,29 @@ void GameElementLayer::draw(QPainter &painter, Bird *bird) {
     // 碰撞检测
     isCollideBird(bird);
 
+    // 得分检测 - 根据距离
+    checkScore(bird);
+
     // 生成新水管
     pipeBornLogic(bird);
+}
+
+void GameElementLayer::checkScore(Bird *bird) {
+    if (bird->isDead()) {
+        return;
+    }
+
+    int birdX = bird->getBirdX();
+
+    // 每对管道按顺序添加：先上后下，所以偶数索引是上管道
+    for (int i = 0; i < pipes.size(); i += 2) {
+        Pipe *pipe = pipes[i];
+        // 只在未被计分且鸟越过管道时计分
+        if (!pipe->isScored() && birdX > pipe->getX() + Pipe::PIPE_WIDTH) {
+            counter->score();
+            pipe->setScored(true);
+        }
+    }
 }
 
 void GameElementLayer::pipeBornLogic(Bird *bird) {
@@ -58,17 +79,8 @@ void GameElementLayer::pipeBornLogic(Bird *bird) {
     } else {
         // 判断最后一对水管是否完全进入游戏窗口
         Pipe *lastPipe = pipes.last();
-        int currentDistance = lastPipe->getX() - bird->getBirdX() + Bird::BIRD_WIDTH / 2;
-        const int SCORE_DISTANCE = Pipe::PIPE_WIDTH * 2 + Constant::HORIZONTAL_INTERVAL;
 
         if (lastPipe->isInFrame()) {
-            // 得分检测：当 currentDistance 满足条件且这根管道还没得过分
-            if (lastScoreX != lastPipe->getX() &&
-                currentDistance <= SCORE_DISTANCE + Pipe::PIPE_WIDTH * 3 / 2) {
-                counter->score();
-                lastScoreX = lastPipe->getX();
-            }
-
             // 生成新管道
             int currentScore = static_cast<int>(counter->getCurrentScore()) + 1;
 

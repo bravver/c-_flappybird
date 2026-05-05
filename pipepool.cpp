@@ -29,17 +29,23 @@ void PipePool::destroy() {
 }
 
 Pipe* PipePool::get(const QString &type) {
+    Pipe* pipe;
     if (type == "MovingPipe") {
         if (!movingPipes.isEmpty()) {
-            return movingPipes.takeLast();
+            pipe = movingPipes.takeLast();
+        } else {
+            pipe = new Pipe();
         }
-        return new Pipe();
     } else {
         if (!normalPipes.isEmpty()) {
-            return normalPipes.takeLast();
+            pipe = normalPipes.takeLast();
+        } else {
+            pipe = new Pipe();
         }
-        return new Pipe();
     }
+    // 重置计分标志
+    pipe->setScored(false);
+    return pipe;
 }
 
 void PipePool::giveBack(Pipe *pipe) {

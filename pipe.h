@@ -37,6 +37,8 @@ public:
     int getX() const;
     int getType() const;
     QRect getPipeRect() const;
+    bool isScored() const;
+    void setScored(bool scored);
 
     static int PIPE_WIDTH;
     static int PIPE_HEIGHT;
@@ -50,6 +52,9 @@ private:
     void drawTopNormal(QPainter &painter);
     void drawBottomNormal(QPainter &painter);
     void drawHoverNormal(QPainter &painter);
+    void drawTopHard(QPainter &painter);
+    void drawBottomHard(QPainter &painter);
+    void drawHoverHard(QPainter &painter);
 
     QPixmap pipeBodyImage;
     QPixmap pipeTopImage;
@@ -58,6 +63,7 @@ private:
     int x, y;
     int width, height;
     bool visible;
+    bool scored;
 
     QRect pipeRect;
 };

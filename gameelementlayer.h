@@ -22,6 +22,7 @@ public:
 
 private:
     void pipeBornLogic(Bird *bird);
+    void checkScore(Bird *bird);
     void addNormalPipe();
     void addHoverPipe();
     void addMovingNormalPipe();
