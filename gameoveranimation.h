@@ -20,6 +20,7 @@ private:
     QPixmap overImage;
     QPixmap againImage;
     QPixmap scoreImage;
+    int flash;
 };
 
 #endif // GAMEOVERANIMATION_H

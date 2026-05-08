@@ -12,6 +12,7 @@ SOURCES += \
     game.cpp \
     bird.cpp \
     pipe.cpp \
+    movingpipe.cpp \
     pipepool.cpp \
     gamebackground.cpp \
     gameforeground.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     game.h \
     bird.h \
     pipe.h \
+    movingpipe.h \
     pipepool.h \
     gamebackground.h \
     gameforeground.h \

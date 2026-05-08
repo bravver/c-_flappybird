@@ -26,11 +26,10 @@ public:
     Pipe(QObject *parent = nullptr);
     ~Pipe();
 
-    void setAttribute(int x, int y, int height, int type, bool visible);
-    void setRectangle(int x, int y, int height);
+    virtual void setAttribute(int x, int y, int height, int type, bool visible);
+    virtual void setRectangle(int x, int y, int height);
 
-    void draw(QPainter &painter, Bird *bird);
-    void movement();
+    virtual void draw(QPainter &painter, Bird *bird);
     bool isVisible() const;
     bool isInFrame() const;
 
@@ -48,24 +47,23 @@ public:
     int type;
     int speed;
 
-private:
-    void drawTopNormal(QPainter &painter);
-    void drawBottomNormal(QPainter &painter);
-    void drawHoverNormal(QPainter &painter);
-    void drawTopHard(QPainter &painter);
-    void drawBottomHard(QPainter &painter);
-    void drawHoverHard(QPainter &painter);
-
-    QPixmap pipeBodyImage;
-    QPixmap pipeTopImage;
-    QPixmap pipeBottomImage;
+protected:
+    virtual void movement();
 
     int x, y;
     int width, height;
     bool visible;
-    bool scored;
-
     QRect pipeRect;
+    QPixmap pipeBodyImage;
+    QPixmap pipeTopImage;
+    QPixmap pipeBottomImage;
+
+private:
+    void drawTopNormal(QPainter &painter);
+    void drawBottomNormal(QPainter &painter);
+    void drawHoverNormal(QPainter &painter);
+
+    bool scored;
 };
 
 #endif // PIPE_H

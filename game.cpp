@@ -52,7 +52,7 @@ void Game::paintEvent(QPaintEvent *event) {
     background->draw(painter, bird);
 
     // 绘制前景层
-    foreground->draw(painter);
+    foreground->draw(painter, bird);
 
     if (gameState == GAME_READY) {
         // 游戏未开始，绘制欢迎动画

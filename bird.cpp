@@ -1,10 +1,12 @@
 #include "bird.h"
 #include "game.h"
+#include "gamebackground.h"
 #include <QPainter>
 #include <QDebug>
 
 int Bird::BIRD_WIDTH = 0;
 int Bird::BIRD_HEIGHT = 0;
+int Bird::BOTTOM_BOUNDARY = 0;
 
 Bird::Bird(QObject *parent)
     : QObject(parent)
@@ -43,6 +45,8 @@ Bird::Bird(QObject *parent)
     if (!normalImages.isEmpty()) {
         BIRD_WIDTH = normalImages[0].width();
         BIRD_HEIGHT = normalImages[0].height();
+        // 初始化 BOTTOM_BOUNDARY（需要 BIRD_HEIGHT 和 GameBackground::GROUND_HEIGHT）
+        BOTTOM_BOUNDARY = Constant::FRAME_HEIGHT - GameBackground::GROUND_HEIGHT - (BIRD_HEIGHT / 2);
     }
 
     // 初始化碰撞矩形
@@ -96,7 +100,7 @@ void Bird::movement() {
 
     if (state == BIRD_FALL || state == BIRD_DEAD_FALL) {
         freeFall();
-        if (collisionRect.y() > (Constant::FRAME_HEIGHT - 35 - BIRD_HEIGHT / 2)) {
+        if (collisionRect.y() > BOTTOM_BOUNDARY) {
             if (state == BIRD_FALL) {
                 crashSound->play();
             }
@@ -109,7 +113,7 @@ void Bird::freeFall() {
     if (velocity < MAX_VEL_Y) {
         velocity -= ACC_Y;
     }
-    y = qMin(y - velocity, Constant::FRAME_HEIGHT - 35 - BIRD_HEIGHT / 2);
+    y = qMin(y - velocity, BOTTOM_BOUNDARY);
     collisionRect.translate(0, -velocity);
 }
 

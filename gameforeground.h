@@ -6,6 +6,7 @@
 #include <QPixmap>
 #include <QVector>
 #include "constant.h"
+#include "bird.h"
 
 class Cloud : public QObject {
     Q_OBJECT
@@ -14,8 +15,7 @@ public:
     Cloud(const QPixmap &image, int x, int y, QObject *parent = nullptr);
     ~Cloud();
 
-    void draw(QPainter &painter);
-    void movement();
+    void draw(QPainter &painter, Bird *bird);
     bool isOutFrame() const;
     int getX() const;
 
@@ -23,6 +23,8 @@ private:
     QPixmap image;
     int x, y;
     int speed;
+    int scaledWidth;
+    int scaledHeight;
 };
 
 class GameForeground : public QObject {
@@ -32,7 +34,7 @@ public:
     GameForeground(QObject *parent = nullptr);
     ~GameForeground();
 
-    void draw(QPainter &painter);
+    void draw(QPainter &painter, Bird *bird);
 
 private:
     void cloudBornLogic();

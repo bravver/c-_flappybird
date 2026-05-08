@@ -2,6 +2,11 @@
 
 基于 Qt6 开发的 Flappy Bird 游戏。
 
+## 版本历史
+
+- **v2.0.0** - 新增移动管道系统，管道可上下往复移动，难度进一步提升
+- **v1.0.0** - 初始版本，基础游戏玩法
+
 ## 游戏截图
 
 ![Flappy Bird](resources/readme_img/start.png)
@@ -18,9 +23,13 @@
 - [x] 30 FPS 游戏循环
 - [x] 小鸟翅膀动画（8帧循环）
 - [x] 背景无限滚动
-- [x] 云朵飘动效果
-- [x] 三种管道类型：普通管道、悬浮管道（中部悬挂）
-- [x] 游戏欢迎界面与结束界面
+- [x] 云朵飘动效果（含随机缩放 1.0~2.0 倍）
+- [x] 三种管道类型：普通管道、悬浮管道、移动管道
+- [x] 游戏欢迎界面与结束界面（带闪烁动画）
+
+### 创新点 v2.0
+- **移动管道系统**：管道可沿垂直方向往复移动（最大移动距离 50px），分为普通移动管道和悬浮移动管道两种类型
+- **动态难度调整**：分数越高，移动管道出现的概率越大
 
 ### 音效
 - [x] 飞行音效
@@ -32,11 +41,10 @@
 - [x] 单例模式（计分器、对象池）
 - [x] 对象池模式（管道复用，避免频繁内存分配）
 - [x] 难度递增（分数越高，移动管道出现概率越大）
+- [x] 多态管道系统（Pipe 基类 + MovingPipe 子类）
 
 ## 下一步计划
 
-- [ ] 实现移动管道（上下移动的水管）
-- [ ] 云朵随机缩放效果
 - [ ] 添加开始菜单
 - [ ] 添加鼠标/触摸操控支持
 - [ ] 添加游戏暂停功能
@@ -54,7 +62,7 @@
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/你的用户名/flappybird-qt.git
+git clone https://github.com/bravver/flappybird.git
 cd flappybird-qt
 
 # 2. 使用 Qt Creator 打开项目
@@ -65,7 +73,7 @@ cd flappybird-qt
 
 ### 方法二：下载预编译版本
 
-前往 [Releases](https://github.com/你的用户名/flappybird-qt/releases) 页面下载最新版本的 `flappybird-qt.exe`，双击即可运行。
+前往 [Releases](https://github.com/bravver/flappybird/releases) 页面下载最新版本的 `flappybird-qt.exe`，双击即可运行。
 
 ### 游戏操作
 
@@ -90,7 +98,8 @@ flappybird-qt/
 ├── game.h / game.cpp       # 游戏主窗口
 ├── constant.h / constant.cpp # 常量定义
 ├── bird.h / bird.cpp        # 小鸟类
-├── pipe.h / pipe.cpp        # 水管类
+├── pipe.h / pipe.cpp        # 水管基类
+├── movingpipe.h / cpp      # 移动水管类（v2.0新增）
 ├── pipepool.h / pipepool.cpp # 水管对象池
 ├── gamebackground.h/cpp     # 游戏背景
 ├── gameforeground.h/cpp     # 游戏前景(云朵)

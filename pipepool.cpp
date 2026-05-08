@@ -1,4 +1,7 @@
 #include "pipepool.h"
+#include "movingpipe.h"
+
+static constexpr int MAX_PIPE_COUNT = 30;
 
 PipePool* PipePool::instance = nullptr;
 
@@ -6,8 +9,8 @@ PipePool::PipePool(QObject *parent)
     : QObject(parent) {
     // 预创建一些水管
     for (int i = 0; i < FULL_PIPE; i++) {
-        normalPipes.append(new Pipe());
-        movingPipes.append(new Pipe());
+        normalPipes.append(new Pipe(this));
+        movingPipes.append(new MovingPipe(this));
     }
 }
 
@@ -34,7 +37,7 @@ Pipe* PipePool::get(const QString &type) {
         if (!movingPipes.isEmpty()) {
             pipe = movingPipes.takeLast();
         } else {
-            pipe = new Pipe();
+            pipe = new MovingPipe();
         }
     } else {
         if (!normalPipes.isEmpty()) {
@@ -51,8 +54,16 @@ Pipe* PipePool::get(const QString &type) {
 void PipePool::giveBack(Pipe *pipe) {
     if (pipe->type == Pipe::TYPE_TOP_HARD || pipe->type == Pipe::TYPE_BOTTOM_HARD ||
         pipe->type == Pipe::TYPE_HOVER_HARD) {
-        movingPipes.append(pipe);
+        if (movingPipes.size() < MAX_PIPE_COUNT) {
+            movingPipes.append(pipe);
+        } else {
+            delete pipe;
+        }
     } else {
-        normalPipes.append(pipe);
+        if (normalPipes.size() < MAX_PIPE_COUNT) {
+            normalPipes.append(pipe);
+        } else {
+            delete pipe;
+        }
     }
 }

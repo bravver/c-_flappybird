@@ -64,14 +64,8 @@ void Pipe::draw(QPainter &painter, Bird *bird) {
     case TYPE_HOVER_NORMAL:
         drawHoverNormal(painter);
         break;
-    case TYPE_TOP_HARD:
-        drawTopHard(painter);
-        break;
-    case TYPE_BOTTOM_HARD:
-        drawBottomHard(painter);
-        break;
-    case TYPE_HOVER_HARD:
-        drawHoverHard(painter);
+    default:
+        // HARD types handled by MovingPipe subclass
         break;
     }
 
@@ -152,16 +146,4 @@ bool Pipe::isScored() const {
 
 void Pipe::setScored(bool scored) {
     this->scored = scored;
-}
-
-void Pipe::drawTopHard(QPainter &painter) {
-    drawTopNormal(painter);
-}
-
-void Pipe::drawBottomHard(QPainter &painter) {
-    drawBottomNormal(painter);
-}
-
-void Pipe::drawHoverHard(QPainter &painter) {
-    drawHoverNormal(painter);
 }

@@ -2,9 +2,11 @@
 #include "bird.h"
 #include "scorecounter.h"
 #include "constant.h"
+#include <QFontMetrics>
 
 GameOverAnimation::GameOverAnimation(QObject *parent)
-    : QObject(parent) {
+    : QObject(parent)
+    , flash(0) {
 
     overImage = QPixmap(Constant::OVER_IMG_PATH);
     againImage = QPixmap(Constant::AGAIN_IMG_PATH);
@@ -32,16 +34,27 @@ void GameOverAnimation::draw(QPainter &painter, Bird *bird) {
     painter.setFont(font);
     painter.setPen(Qt::black);
 
-    // 当前分数
+    // 当前分数 - 居中显示在分数面板左半边
     QString currentStr = QString::number(counter->getCurrentScore());
-    painter.drawText(scoreX + 50, scoreY + 35, currentStr);
+    int halfPanelWidth = scoreImage.width() / 2;
+    int currentX = scoreX + halfPanelWidth / 2;
+    currentX -= QFontMetrics(font).horizontalAdvance(currentStr) / 2;
+    painter.drawText(currentX, scoreY + 35, currentStr);
 
-    // 最高分
+    // 最高分 - 居中显示在分数面板右半边
     QString bestStr = QString::number(counter->getBestScore());
-    painter.drawText(scoreX + 170, scoreY + 35, bestStr);
+    int bestX = scoreX + halfPanelWidth + halfPanelWidth / 2;
+    bestX -= QFontMetrics(font).horizontalAdvance(bestStr) / 2;
+    painter.drawText(bestX, scoreY + 35, bestStr);
 
-    // 绘制再来一次
-    int againX = (Constant::FRAME_WIDTH - againImage.width()) / 2;
-    int againY = scoreY + scoreImage.height() + 20;
-    painter.drawPixmap(againX, againY, againImage);
+    // 绘制再来一次 - 图像闪烁
+    const int COUNT = 30;
+    if (flash++ > COUNT) {
+        int againX = (Constant::FRAME_WIDTH - againImage.width()) / 2;
+        int againY = Constant::FRAME_HEIGHT / 5 * 3;
+        painter.drawPixmap(againX, againY, againImage);
+    }
+    if (flash == COUNT * 2) {
+        flash = 0;
+    }
 }

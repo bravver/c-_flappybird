@@ -10,6 +10,8 @@
 #include "constant.h"
 #include "scorecounter.h"
 
+class GameBackground;
+
 class Bird : public QObject {
     Q_OBJECT
 
@@ -64,7 +66,7 @@ private:
     static constexpr int ACC_FLAP = 14;
     static constexpr int ACC_Y = 2;
     static constexpr int MAX_VEL_Y = 15;
-    static constexpr int BOTTOM_BOUNDARY = Constant::FRAME_HEIGHT - 35 - 17; // Approximate half bird height
+    static int BOTTOM_BOUNDARY;
 
     QRect collisionRect;
     static constexpr int RECT_DESCALE = 2;

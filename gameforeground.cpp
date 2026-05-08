@@ -7,21 +7,26 @@ Cloud::Cloud(const QPixmap &image, int x, int y, QObject *parent)
     , image(image)
     , x(x)
     , y(y)
-    , speed(Constant::GAME_SPEED / 2) {
+    , speed(Constant::GAME_SPEED) {
+    // 云朵缩放比例 1.0~2.0，与 Java 版一致
+    double scale = 1.0 + QRandomGenerator::global()->bounded(100) / 100.0;
+    scaledWidth = static_cast<int>(scale * image.width());
+    scaledHeight = static_cast<int>(scale * image.width()); // 使用宽度保持宽高比
 }
 
 Cloud::~Cloud() {}
 
-void Cloud::draw(QPainter &painter) {
-    painter.drawPixmap(x, y, image);
-}
-
-void Cloud::movement() {
-    x -= speed;
+void Cloud::draw(QPainter &painter, Bird *bird) {
+    int currentSpeed = speed;
+    if (bird->isDead()) {
+        currentSpeed = 1; // 小鸟死亡后云朵减速
+    }
+    x -= currentSpeed;
+    painter.drawPixmap(x, y, scaledWidth, scaledHeight, image);
 }
 
 bool Cloud::isOutFrame() const {
-    return x < -image.width();
+    return x < -scaledWidth;
 }
 
 int Cloud::getX() const {
@@ -42,12 +47,11 @@ GameForeground::~GameForeground() {
     qDeleteAll(clouds);
 }
 
-void GameForeground::draw(QPainter &painter) {
+void GameForeground::draw(QPainter &painter, Bird *bird) {
     cloudBornLogic();
 
     for (Cloud *cloud : clouds) {
-        cloud->draw(painter);
-        cloud->movement();
+        cloud->draw(painter, bird);
     }
 
     // 移除飞出屏幕的云

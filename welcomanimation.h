@@ -17,6 +17,7 @@ public:
 private:
     QPixmap titleImage;
     QPixmap noticeImage;
+    int flashCount;
 };
 
 #endif // WELCOMEANIMATION_H
