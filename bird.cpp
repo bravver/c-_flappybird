@@ -1,6 +1,7 @@
 #include "bird.h"
 #include "game.h"
 #include "gamebackground.h"
+#include "skinmanager.h"
 #include <QPainter>
 #include <QDebug>
 
@@ -20,32 +21,42 @@ Bird::Bird(QObject *parent)
     , flySound(new QSoundEffect(this))
     , crashSound(new QSoundEffect(this)) {
 
-    // 加载普通飞行帧
+    // 加载蓝色皮肤图片（完整8帧）
     for (int i = 0; i < 8; i++) {
-        QPixmap pix(Constant::BIRDS_IMG_PATH[i]);
-        normalImages.append(pix);
+        blueNormalImages.append(QPixmap(QString(":/resources/img/%1.png").arg(i)));
     }
-
-    // 加载上升帧
-    QPixmap upPix(Constant::BIRDS_IMG_PATH[8]);
+    blueUpImages.append(QPixmap(":/resources/img/up.png"));
+    for (int i = 1; i < 8; i++) {
+        blueUpImages.append(blueUpImages[0]);
+    }
     for (int i = 0; i < 8; i++) {
-        upImages.append(upPix);
+        blueFallImages.append(QPixmap(QString(":/resources/img/down_%1.png").arg(i)));
     }
+    blueDeadImage = QPixmap(":/resources/img/dead.png");
 
-    // 加载下落帧
-    for (int i = 9; i < 17; i++) {
-        QPixmap pix(Constant::BIRDS_IMG_PATH[i]);
-        fallImages.append(pix);
+    // 加载黄色皮肤图片（3帧简化版）
+    yellowNormalImages.append(QPixmap(":/resources/skin/yellow/yellowbird-midflap.png"));
+    yellowNormalImages.append(QPixmap(":/resources/skin/yellow/yellowbird-upflap.png"));
+    yellowNormalImages.append(QPixmap(":/resources/skin/yellow/yellowbird-midflap.png"));
+    yellowNormalImages.append(QPixmap(":/resources/skin/yellow/yellowbird-downflap.png"));
+    yellowNormalImages.append(QPixmap(":/resources/skin/yellow/yellowbird-midflap.png"));
+    yellowNormalImages.append(QPixmap(":/resources/skin/yellow/yellowbird-upflap.png"));
+    yellowNormalImages.append(QPixmap(":/resources/skin/yellow/yellowbird-midflap.png"));
+    yellowNormalImages.append(QPixmap(":/resources/skin/yellow/yellowbird-downflap.png"));
+
+    yellowUpImages.append(QPixmap(":/resources/skin/yellow/yellowbird-upflap.png"));
+    for (int i = 1; i < 8; i++) {
+        yellowUpImages.append(yellowUpImages[0]);
     }
+    for (int i = 0; i < 8; i++) {
+        yellowFallImages.append(yellowNormalImages[i % yellowNormalImages.size()]);
+    }
+    yellowDeadImage = blueDeadImage;  // 共享死亡图
 
-    // 加载死亡帧
-    deadImage = QPixmap(Constant::BIRDS_IMG_PATH[17]);
-
-    // 设置尺寸
-    if (!normalImages.isEmpty()) {
-        BIRD_WIDTH = normalImages[0].width();
-        BIRD_HEIGHT = normalImages[0].height();
-        // 初始化 BOTTOM_BOUNDARY（需要 BIRD_HEIGHT 和 GameBackground::GROUND_HEIGHT）
+    // 设置尺寸（使用蓝色皮肤的第一帧）
+    if (!blueNormalImages.isEmpty()) {
+        BIRD_WIDTH = blueNormalImages[0].width();
+        BIRD_HEIGHT = blueNormalImages[0].height();
         BOTTOM_BOUNDARY = Constant::FRAME_HEIGHT - GameBackground::GROUND_HEIGHT - (BIRD_HEIGHT / 2);
     }
 
@@ -66,6 +77,16 @@ Bird::~Bird() {}
 void Bird::draw(QPainter &painter) {
     movement();
 
+    // 获取当前选中的皮肤
+    QString skinId = SkinManager::getInstance()->getCurrentSkinId();
+    bool isBlue = (skinId == "blue");
+
+    // 根据皮肤选择对应的图片组
+    QVector<QPixmap> &normalImages = isBlue ? blueNormalImages : yellowNormalImages;
+    QVector<QPixmap> &upImages = isBlue ? blueUpImages : yellowUpImages;
+    QVector<QPixmap> &fallImages = isBlue ? blueFallImages : yellowFallImages;
+    QPixmap &deadImg = isBlue ? blueDeadImage : yellowDeadImage;
+
     // 选择当前帧图片
     QPixmap image;
     if (velocity > 0 && state == BIRD_UP) {
@@ -73,13 +94,13 @@ void Bird::draw(QPainter &painter) {
     } else {
         int stateIndex = qMin(static_cast<int>(state), static_cast<int>(BIRD_DEAD_FALL));
         if (stateIndex == BIRD_NORMAL || stateIndex == BIRD_FALL) {
-            image = normalImages[wingState / 10 % 8];
+            image = normalImages[wingState / 10 % normalImages.size()];
         } else if (stateIndex == BIRD_UP) {
             image = upImages[0];
         } else if (stateIndex == BIRD_DEAD_FALL) {
-            image = fallImages[wingState / 10 % 8];
+            image = fallImages[wingState / 10 % fallImages.size()];
         } else {
-            image = deadImage;
+            image = deadImg;
         }
     }
 
@@ -151,6 +172,11 @@ void Bird::reset() {
     state = BIRD_NORMAL;
     y = Constant::FRAME_HEIGHT >> 1;
     velocity = 0;
+
+    // 根据皮肤设置尺寸
+    QString skinId = SkinManager::getInstance()->getCurrentSkinId();
+    bool isBlue = (skinId == "blue");
+    QVector<QPixmap> &normalImages = isBlue ? blueNormalImages : yellowNormalImages;
 
     int imgHeight = normalImages[0].height();
     collisionRect.moveTo(x - BIRD_WIDTH / 2 + RECT_DESCALE,

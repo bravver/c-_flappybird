@@ -20,7 +20,8 @@ SOURCES += \
     welcomanimation.cpp \
     gameoveranimation.cpp \
     scorecounter.cpp \
-    constant.cpp
+    constant.cpp \
+    skinmanager.cpp
 
 HEADERS += \
     constant.h \
@@ -34,7 +35,8 @@ HEADERS += \
     gameelementlayer.h \
     welcomanimation.h \
     gameoveranimation.h \
-    scorecounter.h
+    scorecounter.h \
+    skinmanager.h
 
 RESOURCES += resources.qrc
 

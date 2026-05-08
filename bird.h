@@ -9,6 +9,7 @@
 #include <QSoundEffect>
 #include "constant.h"
 #include "scorecounter.h"
+#include "skinmanager.h"
 
 class GameBackground;
 
@@ -51,11 +52,19 @@ private:
     void die();
     void drawScore(QPainter &painter);
     void movement();
+    void loadSkinImages(const QString &skinId);
 
-    QVector<QPixmap> normalImages;   // 飞行帧 0-7
-    QVector<QPixmap> upImages;        // 上升
-    QVector<QPixmap> fallImages;      // 下落 down_0-7
-    QPixmap deadImage;                // 死亡
+    // 蓝色皮肤图片组
+    QVector<QPixmap> blueNormalImages;
+    QVector<QPixmap> blueUpImages;
+    QVector<QPixmap> blueFallImages;
+    QPixmap blueDeadImage;
+
+    // 黄色皮肤图片组
+    QVector<QPixmap> yellowNormalImages;
+    QVector<QPixmap> yellowUpImages;
+    QVector<QPixmap> yellowFallImages;
+    QPixmap yellowDeadImage;
 
     int x;
     int y;

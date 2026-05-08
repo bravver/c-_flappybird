@@ -89,6 +89,10 @@ void Game::keyPressEvent(QKeyEvent *event) {
             resetGame();
             break;
         }
+    } else if (keycode == Qt::Key_Left && gameState == GAME_READY) {
+        welcomeAnimation->keyLeft();
+    } else if (keycode == Qt::Key_Right && gameState == GAME_READY) {
+        welcomeAnimation->keyRight();
     }
 }
 

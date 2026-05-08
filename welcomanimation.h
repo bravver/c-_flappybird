@@ -13,10 +13,13 @@ public:
     ~WelcomeAnimation();
 
     void draw(QPainter &painter);
+    void keyLeft();
+    void keyRight();
 
 private:
     QPixmap titleImage;
     QPixmap noticeImage;
+    QPixmap arrowImage;
     int flashCount;
 };
 
